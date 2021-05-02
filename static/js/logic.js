@@ -113,6 +113,13 @@ function createMap(earthquakes) {
       collapsed: false
     }).addTo(myMap);
     
-    
+    // Set up the legend
+    var legend = L.control({ position: "bottomleft" });
+    legend.onAdd = function() {
+	var div = L.DomUtil.create("div", "info legend");
+	var limits = ["(-10)-10", "10-30", "30-50", "50-70", "70-90", "90+"];
+	var colors = ["#A3F600", "#DCF400", "#F7DB11", "#FDB72A", "#FCA35D", "#FF5F65"];
+	var labels = [];
+
   }
   
