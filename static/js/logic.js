@@ -21,10 +21,11 @@ d3.json(link).then(function(earthquake_data) {
   function createFeatures(earthquakeData) {
 	
     //*********************For Earthquake Layer******************************
+
+    
   
     //creating empty array to store earthquake circles markers
     var earthquakes = [];
-		
 	
 	//Loop through locations and create earthquake circle markers
 	for (var i = 0; i < earthquakeData.length; i++) {
@@ -32,13 +33,34 @@ d3.json(link).then(function(earthquake_data) {
 		//Extracting value of depth
 		var depth = earthquakeData[i].geometry.coordinates.slice(2)
 		
+		//Defining the colro of circle marker based on depth value
+		var color = "";
+		  if (depth >= 90) {
+			color = "#FF5F65";
+		  }
+		  else if (depth >= 70) {
+			color = "#FCA35D";
+		  }
+		  else if (depth >= 50) {
+			color = "#FDB72A";
+		  }
+		  else if (depth >= 30) {
+			color = "#F7DB11";
+		  }
+		  else if (depth >= 10) {
+			color = "#DCF400";
+		  }
+		  else {
+			color = "#A3F600";
+		  }
+		
 	  //Setting the circle marker radius 
 	  earthquakes.push(
 		L.circle(earthquakeData[i].geometry.coordinates.slice(0,2).reverse(), {
 		  stroke: true,
 		  fillOpacity: 0.75,
 		  color: "black",
-		  fillColor: "blue",
+		  fillColor: color,
 		  radius:earthquakeData[i].properties.mag*30000
 		}).bindPopup("<h3>" + earthquakeData[i].properties.place + "</h3><hr><p>" + new Date(earthquakeData[i].properties.time) + "</p>")
 	  );
