@@ -121,5 +121,21 @@ function createMap(earthquakes) {
 	var colors = ["#A3F600", "#DCF400", "#F7DB11", "#FDB72A", "#FCA35D", "#FF5F65"];
 	var labels = [];
 
+    // Add a header
+	var legendInfo = "<h4>Earthquake Depth</h4>" 
+
+	div.innerHTML = legendInfo;
+
+	limits.forEach(function(limit, index) {
+	  labels.push("<li style=\"background-color: " + colors[index]+"\">" + limits[index] + "</li>");
+	});
+
+	div.innerHTML += "<ul style=\"text-align: center\">" + labels.join("") + "</ul>";
+	return div;
+    };
+
+    // Adding legend to the map
+    legend.addTo(myMap);
+
   }
   
