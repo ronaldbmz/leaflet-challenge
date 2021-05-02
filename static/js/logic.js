@@ -84,7 +84,7 @@ d3.json(link).then(function(earthquake_data) {
 	var mapStyle = {
 	  color: "orange",
 	  fillOpacity: 0.5,
-	  weight: 3
+	  weight: 2.5
 	};
 
   //Create a GeoJSON layer containing the features array on the Tectonics object
