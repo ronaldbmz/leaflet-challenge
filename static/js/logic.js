@@ -28,14 +28,13 @@ d3.json(link).then(function(earthquake_data) {
   });
   
 
-  function createFeatures(earthquakeData) {
+  function createFeatures(earthquakeData, tectonicsData) {
 	
     //*********************For Earthquake Layer******************************
-
-    
   
     //creating empty array to store earthquake circles markers
     var earthquakes = [];
+		
 	
 	//Loop through locations and create earthquake circle markers
 	for (var i = 0; i < earthquakeData.length; i++) {
@@ -75,14 +74,32 @@ d3.json(link).then(function(earthquake_data) {
 		}).bindPopup("<h3>" + earthquakeData[i].properties.place + "</h3><hr><p>" + new Date(earthquakeData[i].properties.time) + "</p>")
 	  );
 	}
+  
+  //Viewing the earthquake output layers
+  console.log("earthquakes")
+  console.log(L.layerGroup(earthquakes))
+  
+  //*********************For Tectonics Layers*********************
+  //Style object for tectonic layer
+	var mapStyle = {
+	  color: "orange",
+	  fillOpacity: 0.5,
+	  weight: 3
+	};
 
-   //Viewing the earthquake output layers
-  console.log("earthquakes layer")
-  console.log(L.layerGroup(earthquakes)) 
+  //Create a GeoJSON layer containing the features array on the Tectonics object
+  var tectonics = L.geoJSON(tectonicsData, {
+		style: mapStyle
+	  });
+  
+  //Viewing the tectonic output layers
+  console.log("Tectonics")
+  console.log(tectonics)
 
   // Sending our earthquakes and tectonic layer to the createMap function
-  createMap(L.layerGroup(earthquakes));
+  createMap(L.layerGroup(earthquakes), tectonics);
 }
+
 
 function createMap(earthquakes) {
 
