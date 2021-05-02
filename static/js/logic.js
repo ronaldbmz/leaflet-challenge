@@ -1,9 +1,13 @@
 // Creating variables for file path
 var link = "/static/data/all_week.geojson";
+var link2 = "/static/data/PB2002_boundaries.json";
 
+// Perform a GET request to get the earthquake data
 // Perform a GET request to get the earthquake data
 d3.json(link).then(function(earthquake_data) {
   
+    // Perform a GET request to get the tectonics plate data
+    d3.json(link2).then(function(tectonics_data) {
     
         
         //review of fetched data sources
@@ -12,11 +16,17 @@ d3.json(link).then(function(earthquake_data) {
         
         console.log("earthquake data features")
         console.log(earthquake_data.features)
-
-        // Once we get a response from both data sources, send the data.features object to the createFeatures function
-	    createFeatures(earthquake_data.features);
         
+        console.log("tectonics data")
+        console.log(tectonics_data)
+        
+        // Once we get a response from both data sources, send the data.features object to the createFeatures function
+        createFeatures(earthquake_data.features, tectonics_data.features);
+    
+      });
+   
   });
+  
 
   function createFeatures(earthquakeData) {
 	
