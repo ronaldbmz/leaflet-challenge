@@ -48,8 +48,8 @@ d3.json(link).then(function(earthquake_data) {
   console.log("earthquakes layer")
   console.log(L.layerGroup(earthquakes)) 
 
-// Sending our earthquakes and tectonic layer to the createMap function
-//createMap(L.layerGroup(earthquakes), tectonics);
+  // Sending our earthquakes and tectonic layer to the createMap function
+  createMap(L.layerGroup(earthquakes));
 }
 
 function createMap(earthquakes) {
